@@ -5,13 +5,6 @@
     <title><%= user.username %>'s Dashboard - Jam Sesh</title>
   </head>
   <body>
-    <header>
-      <div id="header-logo">
-        Jam Sesh
-      </div>
-      <div id="header-user">
-        Hello, <%= user.username %>. <a href="./logout">Logout</a>
-      </div>
-    </header>
+    <% include ../partials/header.ejs %>
   </body>
 </html>

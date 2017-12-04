@@ -20,7 +20,8 @@ router.get('/', (req, res) => {
 // Login Page
 router.get('/login', (req, res) => {
   res.render('user/login.ejs', {
-    message: req.session.message
+    message: req.session.message,
+    user: {}
   });
 });
 

@@ -1,0 +1,14 @@
+<header>
+  <div id="header-logo">
+    Jam Sesh
+  </div>
+  <% if (user.logged || 0) { %>
+  <div id="header-user">
+    Hello, <%= user.username %>. <a href="./logout">Logout</a>
+  </div>
+  <% } else { %>
+    <div id="header-login">
+      <a href="/user/login">Log In</a>
+    </div>
+  <% } %>
+</header>
