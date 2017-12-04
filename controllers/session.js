@@ -6,6 +6,17 @@ const User = require('../models/users.js');
 
 // Routes
 
+// 'Root' Redirect
+router.get('/', (req, res) => {
+  if (req.session.logged) {
+    res.render('user/show.ejs', {
+      user: req.session
+    });
+  } else {
+    res.redirect('login');
+  }
+})
+
 // Login Page
 router.get('/login', (req, res) => {
   res.render('user/login.ejs', {
@@ -21,9 +32,6 @@ router.post('/login', async (req, res) => {
       req.session.username = req.body.username;
       req.session.logged = true;
       console.log((req.session, req.body));
-      // res.render('user/show.ejs', {
-      //   user: req.session
-      // });
       res.redirect('/user/' + req.session.username);
     } else {
       console.log('bad password');
@@ -45,15 +53,11 @@ router.post('/register', async (req, res, next) => {
   const userDbEntry = {};
   userDbEntry.username = username;
   userDbEntry.password = passwordHash;
-  // console.log(userDbEntry);
   try {
     const user = await User.create(userDbEntry);
     console.log(user);
     req.session.username = user.username;
     req.session.logged = true;
-    // res.render('/user/show.ejs', {
-    //   user: req.sessions
-    // });
     res.redirect('/user/' + req.session.username);
   } catch (err) {
     res.send(err.message);
@@ -67,18 +71,14 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  res.render('user/show.ejs', {
-    user: req.session
-  });
-})
-
-// // Read Route (Show)
-// router.get('/:id', async (req, res) => {
-//   const onePhoto = await Photo.findById(req.params.id);
-//   const comments = await Comment.find({photo: onePhoto._id});
-//   // res.send({onePhoto, comments});
-//   res.render('photos/show.ejs', {onePhoto, comments});
-// });
+  if (req.session.logged) {
+    res.render('user/show.ejs', {
+      user: req.session
+    });
+  } else {
+    res.redirect('login');
+  }
+});
 
 // Controller Export
 module.exports = router;

@@ -2,10 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title><%= user.username %>'s Dashboard - Jam Sesh</title>
   </head>
   <body>
-    Hello,
-    <%= user.username %>
+    <header>
+      <div id="header-logo">
+        Jam Sesh
+      </div>
+      <div id="header-user">
+        Hello, <%= user.username %>. <a href="./logout">Logout</a>
+      </div>
+    </header>
   </body>
 </html>
