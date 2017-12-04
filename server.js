@@ -6,7 +6,7 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 
 // Database - Connect
-const mongoURI = 'mongodb://localhost:21017/jam_sesh';
+const mongoURI = 'mongodb://localhost:27017/jam_sesh';
 mongoose.connect(mongoURI, { useMongoClient: true });
 mongoose.Promise = global.Promise;
 
@@ -37,7 +37,7 @@ app.use('/artists', artistsController);
 app.use('/user', sessionsController);
 
 // Root Redirect
-app.get('/', (req, res) => res.redirect('/artists'));
+app.get('/', (req, res) => res.redirect('/user'));
 
 
 // Config
