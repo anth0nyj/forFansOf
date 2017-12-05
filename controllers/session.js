@@ -6,7 +6,6 @@ const User = require('../models/users.js');
 const methodOverride = require('method-override');
 
 // Middleware
-
 router.use(methodOverride('_method'));
 
 // Routes
@@ -14,9 +13,7 @@ router.use(methodOverride('_method'));
 // 'Root' Redirect
 router.get('/', (req, res) => {
   if (req.session.logged) {
-    res.render('user/show.ejs', {
-      user: req.session
-    });
+    res.redirect('/user/' + req.session.username);
   } else {
     res.redirect('login');
   }
@@ -94,6 +91,28 @@ router.get('/:id/settings', async (req, res) => {
     }
   );
 });
+
+// Update Route
+router.put('/user/:id', async (req, res) => {
+  const password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+  const username = req.body.username;
+  const userToUpdate = await User.find({username: req.params.id});
+  try {
+    userToUpdate.username = username;
+    userToUpdate.password = password;
+    res.redirect('/user' + username)
+  } catch (err) {
+    res.send(err.message);
+  }
+});
+
+// Update Route
+// router.put('/:id', async (req, res) => {
+//   const userToUpdate = await User.findOne({username: req.params.id});
+//   await userToUpdate.update(userToUpdate, req.body)
+//   console.log(req.body);
+//   res.redirect('/user/' + userToUpdate.username);
+// });
 
 // Delete User Route
 router.delete('/:id/', async (req, res) => {
