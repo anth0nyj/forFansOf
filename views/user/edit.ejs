@@ -6,5 +6,10 @@
   </head>
   <body>
     <% include ../partials/header.ejs %>
+    <p><%= user.username %></p>
+    <p>=================</p>
+    <form action="/user/<%= user.username %>?_method=DELETE" method="post">
+      <button type="submit" name="delete">Delete Profile</button>
+    </form>
   </body>
 </html>
