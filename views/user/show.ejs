@@ -7,5 +7,12 @@
   <body>
     <% include ../partials/header.ejs %>
     <a href="./<%= user.username %>/settings">Settings</a>
+<br/>
+    Followed Bands:
+    <ul>
+        <% for (let band of bands) { %>
+        <li><%= band %></li>
+        <% } %>
+    </ul>
   </body>
 </html>

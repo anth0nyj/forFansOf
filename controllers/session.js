@@ -67,22 +67,9 @@ router.post('/register', async (req, res, next) => {
   }
 });
 
-// Logout/Destroy Session
-router.get('/logout', (req, res) => {
-  req.session.destroy();
-  console.log(req.session);
-  res.redirect('/user/login');
-});
-
-// Test
-router.get('/test', (req, res) => {
-  res.send(req.session);
-})
-
 // Settings Page
 router.get('/:id/settings', async (req, res) => {
   const userToEdit = await User.findOne({username: req.params.id});
-  console.log(userToEdit);
   res.render(
     'user/edit.ejs',
     {
@@ -93,26 +80,41 @@ router.get('/:id/settings', async (req, res) => {
 });
 
 // Update Route
-router.put('/user/:id', async (req, res) => {
-  const password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-  const username = req.body.username;
-  const userToUpdate = await User.find({username: req.params.id});
+router.put('/:id', async (req, res) => {
+  req.body.followedBands = req.body.followedBands.split(',');
   try {
-    userToUpdate.username = username;
-    userToUpdate.password = password;
-    res.redirect('/user' + username)
+    const userToUpdate = await
+    User.update(
+      {username: req.params.id},
+      {
+        $set: {
+          followedBands: req.body.followedBands
+        }
+      });
+    // userToUpdate.followedBands = req.body.followedBands;
+    // User.update(
+    //   {username: req.params.id},
+    //   {$set:
+    //     {followedBands: req.body.followedBands}
+    //   }
+    // )
+    res.redirect('/user/' + req.session.username);
   } catch (err) {
     res.send(err.message);
   }
 });
 
-// Update Route
-// router.put('/:id', async (req, res) => {
-//   const userToUpdate = await User.findOne({username: req.params.id});
-//   await userToUpdate.update(userToUpdate, req.body)
-//   console.log(req.body);
-//   res.redirect('/user/' + userToUpdate.username);
-// });
+// Logout/Destroy Session
+router.get('/logout', (req, res) => {
+  req.session.destroy();
+  console.log(req.session);
+  res.redirect('/user/login');
+});
+
+// Test
+router.get('/test', (req, res) => {
+  res.send(req.session);
+});
 
 // Delete User Route
 router.delete('/:id/', async (req, res) => {
@@ -127,8 +129,13 @@ router.delete('/:id/', async (req, res) => {
 // User Dashboard Route
 router.get('/:id', async (req, res) => {
   if (req.session.logged) {
+    const userToShow = await User.find({username: req.params.id});
+    console.log(userToShow);
+    const bands = await userToShow[0].followedBands;
+    console.log(bands);
     res.render('user/show.ejs', {
-      user: req.session
+      user: req.session,
+      bands: bands
     });
   } else {
     res.redirect('login');
