@@ -1,0 +1,19 @@
+main {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+label {
+  display: inline !important;
+}
+#main-pic {
+  width: 100% !important;
+}
+
+main #main-pic img {
+  max-width: 500px;
+  max-height: 500px;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
