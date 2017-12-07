@@ -28,6 +28,15 @@
           <li><%= fanOf %></li>
         <% } %>
       </ul>
+      <h3>Albums by <%= artist.name %></h3>
+      <div id="albums-box">
+        <% for (let album of albums) { %>
+          <div class="album-box">
+            <img src="<%= album.img %>">
+            <h4><%= album.title %> </h4>
+          </div>
+        <% } %>
+      </div>
     </main>
     <% include ../partials/footer.ejs %>
   </body>
