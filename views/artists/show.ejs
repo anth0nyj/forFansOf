@@ -32,11 +32,12 @@
       <div id="albums-box">
         <% for (let album of albums) { %>
           <div class="album-box">
-            <img src="<%= album.img %>">
-            <h4><%= album.title %> </h4>
+            <a href="/album/<%= album.albumURL %>"><img src="<%= album.img %>"></a>
+            <h4><a href="/album/<%= album.albumURL %>"><%= album.title %></a></h4>
           </div>
         <% } %>
       </div>
+      <a href="/albums/new">Add an Album</a>
     </main>
     <% include ../partials/footer.ejs %>
   </body>
