@@ -59,15 +59,15 @@ router.delete('/:artist', async (req, res) => {
   const artistToDelete = await Artist.find({name: req.params.name});
   await Artist.findByIdAndRemove(artistToDelete._id);
   res.redirect('artists');
-})
+});
 
 // Read Route (Show)
 router.get('/:name', async (req, res) => {
   const artistToShow = await Artist.find({name: req.params.name});
   res.render('artists/show.ejs',{
     artist: artistToShow
-  })
-})
+  });
+});
 
 
 // Controller Export
