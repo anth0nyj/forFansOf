@@ -5,6 +5,12 @@
     <title>Jam Sesh</title>
   </head>
   <body>
-    <% include ../partials/header.ejs %>
+
+    <% for (let artist of artists) { %>
+      <div class="artist-box">
+      <a href="/artists/<%= artist.artistURL %>"><img src="<%=artist.img%>"></a>
+      <%= artist.name %>
+      </div>
+    <% } %>
   </body>
 </html>

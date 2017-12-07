@@ -11,7 +11,7 @@ const Album = require('../models/albums.js');
 // Read Route (Index)
 router.get('/', async (req, res) => {
   const artists = await Artist.find();
-  res.render('index.ejs', {artists});
+  res.render('artists/index.ejs', {artists});
 });
 
 // Create Page
@@ -21,7 +21,16 @@ router.get('/new', (req, res) => {
 
 // Create Route
 router.post('/', async (req, res) => {
+  const newURL = req.body.name.toLowerCase().replace(/ /g,"_");
   const newArtist = await Artist.create(req.body);
+  await Artist.update(
+    {name: req.body.name},
+    {
+      $set: {
+        artistURL: newURL
+      }
+    }
+  );
   res.redirect('back');
 });
 
@@ -62,8 +71,9 @@ router.delete('/:artist', async (req, res) => {
 });
 
 // Read Route (Show)
-router.get('/:name', async (req, res) => {
-  const artistToShow = await Artist.find({name: req.params.name});
+router.get('/:url', async (req, res) => {
+  const artistToShow = await Artist.find({artistURL: req.params.url});
+  console.log(artistToShow);
   res.render('artists/show.ejs',{
     artist: artistToShow
   });

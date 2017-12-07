@@ -9,6 +9,7 @@ const artistSchema = new Schema({
   from: String,
   img: String,
   forFansOf: [],
+  artistURL: String
 });
 
 module.exports = mongoose.model('Artist', artistSchema);
