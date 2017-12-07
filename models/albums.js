@@ -10,6 +10,7 @@ const albumSchema = new Schema({
   genres: [],
   forFansOf: [],
   tracks: [],
+  albumURL: String,
   artist: {type: mongoose.Schema.Types.ObjectId, ref: 'Artist'}
 });
 
