@@ -91,13 +91,6 @@ router.put('/:id', async (req, res) => {
           followedBands: req.body.followedBands
         }
       });
-    // userToUpdate.followedBands = req.body.followedBands;
-    // User.update(
-    //   {username: req.params.id},
-    //   {$set:
-    //     {followedBands: req.body.followedBands}
-    //   }
-    // )
     res.redirect('/user/' + req.session.username);
   } catch (err) {
     res.send(err.message);
