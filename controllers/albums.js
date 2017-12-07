@@ -17,20 +17,28 @@ mongoose.Promise = global.Promise;
 // Read Route (Index)
 router.get('', async (req, res) => {
   const albums = await Album.find();
-  res.render('albums/index.ejs', {albums});
+  const artists = await Artist.find();
+  res.render('albums/index.ejs', {albums, artists});
 });
 
 // Create Page
 router.get('/new', async (req, res) => {
-  res.render('albums/new.ejs');
+  const albums = await Album.find();
+  const artists = await Artist.find();
+  res.render('albums/new.ejs', {albums, artists});
 });
 
 // Create Route
 router.post('/', async (req, res) => {
-  req.body.artist = Artist.findOne({name: req.body.artist})._id;
-  req.body.forFansOf = req.body.forFansOf.split(',');
-  req.body.genres = req.body.genres.split(',');
-  req.body.tracks = req.body.tracks.split(',');
+  const albums = await Album.find();
+  const artists = await Artist.find();
+  console.log(req.body.artist);
+  const artistToAssign = await Artist.findOne({name: req.body.artist});
+  console.log(artistToAssign);
+  req.body.artist = artistToAssign._id;
+  req.body.forFansOf = req.body.forFansOf.split(', ');
+  req.body.genres = req.body.genres.split(', ');
+  req.body.tracks = req.body.tracks.split(', ');
   const newAlbum = await Album.create(req.body);
   res.redirect('back');
 });
