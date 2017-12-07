@@ -32,15 +32,22 @@ router.get('/new', async (req, res) => {
 router.post('/', async (req, res) => {
   const albums = await Album.find();
   const artists = await Artist.find();
-  console.log(req.body.artist);
   const artistToAssign = await Artist.findOne({name: req.body.artist});
-  console.log(artistToAssign);
   req.body.artist = artistToAssign._id;
   req.body.forFansOf = req.body.forFansOf.split(', ');
   req.body.genres = req.body.genres.split(', ');
   req.body.tracks = req.body.tracks.split(', ');
+  const newURL = req.body.title.toLowerCase().replace(/ /g,"_");
   const newAlbum = await Album.create(req.body);
-  res.redirect('back');
+  await Album.update(
+    {title: req.body.title, artist: artistToAssign._id},
+    {
+      $set: {
+        albumURL: newURL
+      }
+    }
+  );
+  res.redirect('artists/' + artistToAssign.artistURL);
 });
 
 // Update Page
