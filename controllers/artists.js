@@ -1,6 +1,7 @@
 // Dependencies
 const express = require('express');
 const router = express.Router();
+const methodOverride = require('method-override');
 
 // Models
 const Artist = require('../models/artists.js');
@@ -8,6 +9,7 @@ const Album = require('../models/albums.js');
 const User = require('../models/users.js');
 
 // Middleware
+router.use(methodOverride('_method'));
 router.use(express.static('public'));
 
 // Routes
@@ -43,7 +45,7 @@ router.post('/', async (req, res) => {
 // Update Page
 router.get('/:artist/edit', async (req, res) => {
   try {
-    const artistToEdit = await Artist.find({name: req.params.artist});
+    const artistToEdit = await Artist.findOne({artistURL: req.params.artist});
     res.render('artists/edit.ejs', {
     artist: artistToEdit
     });
@@ -57,7 +59,7 @@ router.put('/:artist', async (req, res) => {
   req.body.genres = req.body.genres.split(',');
   req.body.forFansOf = req.body.forFansOf.split(',')
   const artistToEdit = await Artist.update(
-    {name: req.params.artist},
+    {artistURL: req.params.artist},
     {
       $set: {
         name: req.body.name,
@@ -80,7 +82,7 @@ router.delete('/:artist', async (req, res) => {
 
 // Read Route (Show)
 router.get('/:url', async (req, res) => {
-  const artistToShow = await Artist.find({artistURL: req.params.url});
+  const artistToShow = await Artist.findOne({artistURL: req.params.url});
   console.log(artistToShow);
   res.render('artists/show.ejs', {
     artist: artistToShow

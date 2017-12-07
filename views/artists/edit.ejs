@@ -10,7 +10,7 @@
     <% include ../partials/header.ejs %>
     <h1>Edit <%= artist.name %></h1>
 
-    <form action="/<%= artist.artistURL %>" method="post">
+    <form action="/artists/<%= artist.artistURL %>?_method=PUT" method="post">
       <label for="name">Artist: </label>
       <input type="text" name="name" value="<%= artist.name %>" /><br />
       <label for="genres">Genres: </label>
