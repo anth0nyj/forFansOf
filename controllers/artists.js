@@ -5,6 +5,7 @@ const router = express.Router();
 // Models
 const Artist = require('../models/artists.js');
 const Album = require('../models/albums.js');
+const User = require('../models/users.js');
 
 // Routes
 

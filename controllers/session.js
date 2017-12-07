@@ -2,8 +2,12 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
-const User = require('../models/users.js');
 const methodOverride = require('method-override');
+
+// Models
+const User = require('../models/users.js');
+const Artist = require('../models/artists.js');
+const Album = require('../models/albums.js');
 
 // Middleware
 router.use(methodOverride('_method'));
