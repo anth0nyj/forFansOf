@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 require('pretty-error').start();
 
 // Database - Connect
-const mongoURI = 'mongodb://localhost:27017/jam_sesh';
+const mongoURI = 'mongodb://localhost:27017/forFansOf';
 mongoose.connect(mongoURI, { useMongoClient: true });
 mongoose.Promise = global.Promise;
 
