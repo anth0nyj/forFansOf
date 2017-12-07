@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
+require('pretty-error').start();
 
 // Database - Connect
 const mongoURI = 'mongodb://localhost:27017/jam_sesh';
@@ -19,6 +20,7 @@ db.on = ('disconnected', () => console.log('Mongo disconnected'));
 // Middleware
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(session({
   secret: "wortesindgutwennworkefolgen",

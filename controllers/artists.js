@@ -7,6 +7,9 @@ const Artist = require('../models/artists.js');
 const Album = require('../models/albums.js');
 const User = require('../models/users.js');
 
+// Middleware
+router.use(express.static('public'));
+
 // Routes
 
 // Read Route (Index)

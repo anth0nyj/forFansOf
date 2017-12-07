@@ -11,6 +11,7 @@ const Album = require('../models/albums.js');
 
 // Middleware
 router.use(methodOverride('_method'));
+router.use(express.static('public'));
 
 // Routes
 
