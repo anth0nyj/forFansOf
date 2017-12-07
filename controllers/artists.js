@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
       }
     }
   );
-  res.redirect('back');
+  res.redirect('artists/' + newURL);
 });
 
 // Update Page
