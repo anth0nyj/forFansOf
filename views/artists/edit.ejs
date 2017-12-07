@@ -8,6 +8,22 @@
   </head>
   <body>
     <% include ../partials/header.ejs %>
+    <h1>Edit <%= artist.name %></h1>
+
+    <form action="/<%= artist.artistURL %>" method="post">
+      <label for="name">Artist: </label>
+      <input type="text" name="name" value="<%= artist.name %>" /><br />
+      <label for="genres">Genres: </label>
+      <input type="text" name="genres" value="<%= artist.genres %>" /><br />
+      <label for="from">Place of Orign: </label>
+      <input type="text" name="from" value="<%= artist.from %>" /><br />
+      <label for="img">Image URL: </label>
+      <input type="text" name="img" value="<%= artist.img %>" /><br />
+      <label for="forFansOf">For Fans Of: </label>
+      <input type="text" name="forFansOf" value="<%= artist.forFansOf %>" /><br />
+      <button type="submit" name="button">Submit</button>
+    </form>
+
     <% include ../partials/footer.ejs %>
   </body>
 </html>

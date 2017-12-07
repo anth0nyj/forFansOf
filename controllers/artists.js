@@ -25,6 +25,8 @@ router.get('/new', (req, res) => {
 
 // Create Route
 router.post('/', async (req, res) => {
+  req.body.genres = req.body.genres.split(',');
+  req.body.forFansOf = req.body.forFansOf.split(',')
   const newURL = req.body.name.toLowerCase().replace(/ /g,"_");
   const newArtist = await Artist.create(req.body);
   await Artist.update(
@@ -52,6 +54,8 @@ router.get('/:artist/edit', async (req, res) => {
 
 // Update Route
 router.put('/:artist', async (req, res) => {
+  req.body.genres = req.body.genres.split(',');
+  req.body.forFansOf = req.body.forFansOf.split(',')
   const artistToEdit = await Artist.update(
     {name: req.params.artist},
     {
