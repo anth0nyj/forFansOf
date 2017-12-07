@@ -17,3 +17,16 @@ main #main-pic img {
   margin: 0 auto !important;
   text-align: center !important;
 }
+
+#albums-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.album-box img {
+  max-width: 250px;
+  max-height: 250px;
+}
