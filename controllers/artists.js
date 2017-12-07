@@ -74,7 +74,7 @@ router.delete('/:artist', async (req, res) => {
 router.get('/:url', async (req, res) => {
   const artistToShow = await Artist.find({artistURL: req.params.url});
   console.log(artistToShow);
-  res.render('artists/show.ejs',{
+  res.render('artists/show.ejs', {
     artist: artistToShow
   });
 });
