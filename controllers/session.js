@@ -54,7 +54,7 @@ router.post('/login', async (req, res) => {
 });
 
 // Register Post
-router.post('/register', async (req, res, next) => {
+router.post('/register', async (req, res) => {
   const password = req.body.password;
   const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
   const username = req.body.username;
@@ -66,7 +66,7 @@ router.post('/register', async (req, res, next) => {
     console.log(user);
     req.session.username = user.username;
     req.session.logged = true;
-    res.redirect('/' + req.session.username);
+    res.redirect('/user/' + req.session.username);
   } catch (err) {
     res.send(err.message);
   }
