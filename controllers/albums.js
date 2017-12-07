@@ -15,7 +15,7 @@ router.get('', async (req, res) => {
 
 // Create Page
 router.get('/new', async (req, res) => {
-  res.redner('albums/new.ejs');
+  res.render('albums/new.ejs');
 });
 
 // Create Route

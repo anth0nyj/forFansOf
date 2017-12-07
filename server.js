@@ -34,14 +34,14 @@ const sessionsController = require('./controllers/session.js');
 // Controller Middleware
 app.use('/albums', albumsController);
 app.use('/artists', artistsController);
-app.use('/user', sessionsController);
+app.use('/', sessionsController);
 
 // Root Redirect
 app.get('/', (req, res) => {
     if (req.session.logged) {
       res.redirect('user/' + req.session.username);
     } else {
-      res.redirect('user/login');
+      res.redirect('/login');
     }
 });
 

@@ -39,12 +39,12 @@ router.post('/login', async (req, res) => {
     } else {
       console.log('bad password');
       req.session.message = "Username/password combination is invalid";
-      res.redirect('/user/login');
+      res.redirect('/login');
     }
   } catch (err) {
     console.log(err.message);
     req.session.message = "Username/password combination is invalid";
-    res.redirect('/user/login');
+    res.redirect('/login');
   }
 });
 
@@ -61,7 +61,7 @@ router.post('/register', async (req, res, next) => {
     console.log(user);
     req.session.username = user.username;
     req.session.logged = true;
-    res.redirect('/user/' + req.session.username);
+    res.redirect('/' + req.session.username);
   } catch (err) {
     res.send(err.message);
   }
@@ -101,7 +101,7 @@ router.put('/:id', async (req, res) => {
 router.get('/logout', (req, res) => {
   req.session.destroy();
   console.log(req.session);
-  res.redirect('/user/login');
+  res.redirect('/login');
 });
 
 // Test
@@ -116,11 +116,11 @@ router.delete('/:id/', async (req, res) => {
   console.log(user);
   await user.remove();
   // await Comment.remove({user: user._id});
-  res.redirect('/user/login');
+  res.redirect('/login');
 })
 
 // User Dashboard Route
-router.get('/:id', async (req, res) => {
+router.get('/user/:id', async (req, res) => {
   if (req.session.logged) {
     const userToShow = await User.find({username: req.params.id});
     console.log(userToShow);
