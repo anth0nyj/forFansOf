@@ -1,6 +1,7 @@
 // Dependencies
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 
 // Models
 const Album = require('../models/albums.js');
@@ -9,6 +10,7 @@ const User = require('../models/users.js');
 
 // Middleware
 router.use(express.static('public'));
+mongoose.Promise = global.Promise;
 
 // Routes
 
@@ -25,7 +27,11 @@ router.get('/new', async (req, res) => {
 
 // Create Route
 router.post('/', async (req, res) => {
-  const newAlbum = await Artist.create(req.body);
+  req.body.artist = Artist.findOne({name: req.body.artist})._id;
+  req.body.forFansOf = req.body.forFansOf.split(',');
+  req.body.genres = req.body.genres.split(',');
+  req.body.tracks = req.body.tracks.split(',');
+  const newAlbum = await Album.create(req.body);
   res.redirect('back');
 });
 
