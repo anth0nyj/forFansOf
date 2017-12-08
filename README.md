@@ -6,10 +6,13 @@ This web app is intended to serve as a catalog of musicians and their work, as w
 
 ## Technology
 
-### Languages, Databases, and Software
-- Front-end: HTML, CSS, Javascript, Bootstrap
-- Back-end: MEN Stack (MongoDB, Express.js, Node.js
-- Software: Atom, iTerm
+### Languages and Databases
+- Front-end: [HTML](https://html.com/), CSS, [JavaScript](https://www.javascript.com/), [Bootstrap](https://getbootstrap.com/)
+- Back-end: MEN Stack ([MongoDB](https://www.mongodb.com), [Express.js](https://expressjs.com), [Node.js](https://nodejs.org/))
+
+## Software
+- [Atom](https://atom.io/)
+- [iTerm2]https://www.iterm2.com/
 
 ### Deployment
 This web app is hosted on Heroku.
