@@ -22,7 +22,7 @@ main #main-pic img {
 #albums-box {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
   padding: 10px;
 }
