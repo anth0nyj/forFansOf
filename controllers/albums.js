@@ -91,7 +91,7 @@ router.delete('/:album', async (req, res) => {
 
 // Read Route (Show)
 router.get('/:album', async (req, res) => {
-  const albumToShow = await Album.find({title: req.params.album});
+  const albumToShow = await Album.findOne({albumURL: req.params.album});
   res.render('albums/show.ejs', {
     album: albumToShow
   });
