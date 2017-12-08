@@ -26,9 +26,15 @@ router.use(express.static('public'));
 
 // Login Page
 router.get('/login', (req, res) => {
+  const user = {};
+  if (req.session.logged) {
+    user = req.session.username;
+  } else {
+    user.logged = false;
+  }
   res.render('user/login.ejs', {
     message: req.session.message,
-    user: {}
+    user
   });
 });
 
@@ -75,11 +81,18 @@ router.post('/register', async (req, res) => {
 // Settings Page
 router.get('/:id/settings', async (req, res) => {
   const userToEdit = await User.findOne({username: req.params.id});
+  let user = {};
+  if (req.session.logged) {
+    user = req.session.username;
+  } else {
+    user.logged = false;
+  }
   res.render(
     'user/edit.ejs',
     {
       user: userToEdit,
-      index: req.params.id
+      index: req.params.id,
+      user
     }
   );
 });

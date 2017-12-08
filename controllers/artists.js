@@ -17,7 +17,13 @@ router.use(express.static('public'));
 // Read Route (Index)
 router.get('/', async (req, res) => {
   const artists = await Artist.find();
-  res.render('artists/index.ejs', {artists});
+  let user = {};
+  if (req.session.logged) {
+    user = req.session.username;
+  } else {
+    user.logged = false;
+  }
+  res.render('artists/index.ejs', {artists, user});
 });
 
 // Create Page
@@ -47,10 +53,17 @@ router.get('/:artist/edit', async (req, res) => {
   try {
     const artistToEdit = await Artist.findOne({artistURL: req.params.artist});
     const albumsToEdit = await Album.find({artist: artistToEdit._id});
+    let user = {};
+    if (req.session.logged) {
+      user = req.session.username;
+    } else {
+      user.logged = false;
+    }
     res.render('artists/edit.ejs', {
     artist: artistToEdit,
-    albums: albumsToEdit
-    });
+    albums: albumsToEdit,
+    user
+  });
   } catch (err) {
     res.send(err.message);
   }
@@ -91,9 +104,16 @@ router.get('/:url', async (req, res) => {
   const artistToShow = await Artist.findOne({artistURL: req.params.url});
   const albumsToShow = await Album.find({artist: artistToShow._id});
   console.log(artistToShow);
+  let user = {};
+  if (req.session.logged) {
+    user = req.session.username;
+  } else {
+    user.logged = false;
+  }
   res.render('artists/show.ejs', {
     artist: artistToShow,
-    albums: albumsToShow
+    albums: albumsToShow,
+    user
   });
 });
 

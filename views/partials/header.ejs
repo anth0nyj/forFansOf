@@ -4,7 +4,11 @@
   </div>
   <nav class="navbar navbar-inverse">
     <ul class="nav nav-pills">
-      <li><a href="/">Home</a></li>
+      <% if (user.logged || 0 ) { %>
+        <li><a href="/user/<%= user.username %>">Home</a></li>
+      <% } else { %>
+        <li><a href="/login">Login</a></li>
+      <% } %>
       <li><a href="/artists">Artists</a></li>
     </ul>
   </nav>

@@ -27,7 +27,13 @@ mongoose.Promise = global.Promise;
 router.get('/new', async (req, res) => {
   const albums = await Album.find();
   const artists = await Artist.find();
-  res.render('albums/new.ejs', {albums, artists});
+  let user = {};
+  if (req.session.logged) {
+    user = req.session.username;
+  } else {
+    user.logged = false;
+  }
+  res.render('albums/new.ejs', {albums, artists, user});
 });
 
 // Create Route
@@ -95,8 +101,15 @@ router.delete('/:album', async (req, res) => {
 // Read Route (Show)
 router.get('/:album', async (req, res) => {
   const albumToShow = await Album.findOne({albumURL: req.params.album});
+  let user = {};
+  if (req.session.logged) {
+    user = req.session.username;
+  } else {
+    user.logged = false;
+  }
   res.render('albums/show.ejs', {
-    album: albumToShow
+    album: albumToShow,
+    user
   });
 });
 
