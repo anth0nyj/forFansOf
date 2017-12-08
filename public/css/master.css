@@ -20,6 +20,11 @@ header {
   margin-left: 10px;
 }
 
+header #header-logo {
+  text-decoration: none;
+  color: white;
+}
+
 header ul {
 
 }
