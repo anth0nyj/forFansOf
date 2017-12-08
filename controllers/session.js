@@ -15,14 +15,14 @@ router.use(express.static('public'));
 
 // Routes
 
-// 'Root' Redirect
-router.get('/', (req, res) => {
-  if (req.session.logged) {
-    res.redirect('/user/' + req.session.username);
-  } else {
-    res.redirect('login');
-  }
-})
+// // 'Root' Redirect
+// router.get('/', (req, res) => {
+//   if (req.session.logged) {
+//     res.redirect('/user/' + req.session.username);
+//   } else {
+//     res.redirect('login');
+//   }
+// })
 
 // Login Page
 router.get('/login', (req, res) => {
