@@ -73,10 +73,12 @@ router.put('/:artist', async (req, res) => {
   res.redirect('back');
 });
 
-// Delete Route
+// Delete Route (Cascading)
 router.delete('/:artist', async (req, res) => {
   const artistToDelete = await Artist.find({name: req.params.name});
+  const albumsToDelete = await Album.find({artist: artistToDelete._id});
   await Artist.findByIdAndRemove(artistToDelete._id);
+  await Album.remove({artist: albumsToDelete.artist});
   res.redirect('artists');
 });
 
