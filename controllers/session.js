@@ -45,10 +45,8 @@ router.post('/login', async (req, res) => {
     if (bcrypt.compareSync(req.body.password, user.password)) {
       req.session.username = req.body.username;
       req.session.logged = true;
-      console.log((req.session, req.body));
       res.redirect('/user/' + req.session.username);
     } else {
-      console.log('bad password');
       req.session.message = "Username/password combination is invalid";
       res.redirect('/login');
     }

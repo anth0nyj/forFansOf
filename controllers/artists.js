@@ -28,7 +28,13 @@ router.get('/', async (req, res) => {
 
 // Create Page
 router.get('/new', (req, res) => {
-  res.render('artists/new.ejs')
+  let user = {};
+  if (req.session.logged) {
+    user = req.session.username;
+  } else {
+    user.logged = false;
+  }
+  res.render('artists/new.ejs', {user})
 });
 
 // Create Route
