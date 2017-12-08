@@ -79,9 +79,9 @@ router.get('/:album/edit', async (req, res) => {
 
 // Update Route
 router.put('/:album', async (req, res) => {
-  req.body.forFansOf = req.body.forFansOf.split(', ');
-  req.body.genres = req.body.genres.split(', ');
-  req.body.tracks = req.body.tracks.split(', ');
+  req.body.forFansOf = req.body.forFansOf.split(',');
+  req.body.genres = req.body.genres.split(',');
+  req.body.tracks = req.body.tracks.split(',');
   await Album.update(
     {albumURL: req.params.album},
     {

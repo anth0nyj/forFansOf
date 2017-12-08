@@ -9,7 +9,7 @@
   <body>
     <% include ../partials/header.ejs %>
 
-    <form action="/albums/<%= album.albumURL %>" method="post">
+    <form action="/albums/<%= album.albumURL %>?_method=PUT" method="post">
       <input type="text" name="title" value="<%= album.title %>" />
       <input type="text" name="img" value="<%= album.img %>" />
       <input type="number" name="year" value="<%= album.year %>" />
