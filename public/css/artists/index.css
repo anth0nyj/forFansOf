@@ -1,0 +1,17 @@
+#artists-box {
+  display: flex;
+  flex-direction: row;
+}
+
+.artist-box {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  text-align: center;
+  margin: 10px;
+}
+
+.artist-box img {
+  max-width: 300px;
+  max-height: 300px;
+}

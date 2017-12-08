@@ -8,12 +8,15 @@
   </head>
   <body>
     <% include ../partials/header.ejs %>
-    <% for (let artist of artists) { %>
-      <div class="artist-box">
-      <a href="/artists/<%= artist.artistURL %>"><img src="<%=artist.img%>"></a>
-      <%= artist.name %>
+      <div id="artists-box">
+        <% for (let artist of artists) { %>
+          <div class="artist-box">
+          <a href="/artists/<%= artist.artistURL %>"><img src="<%=artist.img%>"></a>
+          <a href="/artists/<%= artist.artistURL %>"><%= artist.name %></a>
+          </div>
+        <% } %>
       </div>
-    <% } %>
+      <a href="./new">Add a new artist</a>
     <% include ../partials/footer.ejs %>
   </body>
 </html>

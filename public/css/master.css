@@ -2,13 +2,16 @@
 body {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
+
 header {
   background-color: black;
   display: flex !important;
   flex-direction: row !important;
   justify-content: space-between !important;
   align-items: center !important;
+  margin-bottom: 10px;
 }
 
 #header-logo {
@@ -34,7 +37,9 @@ header ul li a {
   text-decoration: none !important;
   color: white;
 }
-
+main {
+  flex: 1;
+}
 footer {
   background-color: black;
   color: white;
