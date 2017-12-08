@@ -58,7 +58,7 @@ router.get('/:artist/edit', async (req, res) => {
 router.put('/:artist', async (req, res) => {
   req.body.genres = req.body.genres.split(',');
   req.body.forFansOf = req.body.forFansOf.split(',')
-  const artistToEdit = await Artist.update(
+  await Artist.update(
     {artistURL: req.params.artist},
     {
       $set: {
@@ -70,7 +70,7 @@ router.put('/:artist', async (req, res) => {
       }
     }
   );
-  res.redirect('back');
+  res.redirect('./' + req.params.artist);
 });
 
 // Delete Route (Cascading)

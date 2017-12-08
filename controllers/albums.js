@@ -14,12 +14,12 @@ mongoose.Promise = global.Promise;
 
 // Routes
 
-// Read Route (Index)
-router.get('', async (req, res) => {
-  const albums = await Album.find();
-  const artists = await Artist.find();
-  res.render('albums/index.ejs', {albums, artists});
-});
+// // Read Route (Index)
+// router.get('', async (req, res) => {
+//   const albums = await Album.find();
+//   const artists = await Artist.find();
+//   res.render('albums/index.ejs', {albums, artists});
+// });
 
 // Create Page
 router.get('/new', async (req, res) => {
@@ -77,7 +77,7 @@ router.put('/:album', async (req, res) => {
       }
     }
   );
-  res.redirect('back');
+  res.redirect('./' + req.params.album);
 });
 
 // Delete Route
