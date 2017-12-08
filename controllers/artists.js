@@ -46,8 +46,10 @@ router.post('/', async (req, res) => {
 router.get('/:artist/edit', async (req, res) => {
   try {
     const artistToEdit = await Artist.findOne({artistURL: req.params.artist});
+    const albumsToEdit = await Album.find({artist: artistToEdit._id});
     res.render('artists/edit.ejs', {
-    artist: artistToEdit
+    artist: artistToEdit,
+    albums: albumsToEdit
     });
   } catch (err) {
     res.send(err.message);
@@ -75,11 +77,13 @@ router.put('/:artist', async (req, res) => {
 
 // Delete Route (Cascading)
 router.delete('/:artist', async (req, res) => {
-  const artistToDelete = await Artist.find({name: req.params.name});
+  const artistToDelete = await Artist.findOne({artistURL: req.params.artist});
+  console.log('Artist to Delete: ' + artistToDelete);
   const albumsToDelete = await Album.find({artist: artistToDelete._id});
+  console.log('Albums To Delete: ' + albumsToDelete);
+  await Album.remove({artist: artistToDelete._id});
   await Artist.findByIdAndRemove(artistToDelete._id);
-  await Album.remove({artist: albumsToDelete.artist});
-  res.redirect('artists');
+  res.redirect('/artists');
 });
 
 // Read Route (Show)
