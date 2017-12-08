@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
 
 // Models
 const Album = require('../models/albums.js');
@@ -10,6 +11,7 @@ const User = require('../models/users.js');
 
 // Middleware
 router.use(express.static('public'));
+router.use(methodOverride('_method'));
 mongoose.Promise = global.Promise;
 
 // Routes
