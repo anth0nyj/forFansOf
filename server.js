@@ -49,10 +49,10 @@ app.get('/', (req, res) => {
 
 
 // Config
-const PORT = 3002;
+const PORT = process.env.PORT || 3002;
 // Listen
 app.listen(PORT, () => {
   console.log('=============================');
-  console.log('Server app on port: ', PORT);
+  console.log('Server running on port: ', PORT);
   console.log('=============================');
 });
