@@ -68,7 +68,7 @@ router.get('/:artist/edit', async (req, res) => {
     res.render('artists/edit.ejs', {
     artist: artistToEdit,
     albums: albumsToEdit,
-    user
+    user: user
   });
   } catch (err) {
     res.send(err.message);

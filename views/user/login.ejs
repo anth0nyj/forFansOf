@@ -8,28 +8,33 @@
   </head>
   <body>
     <% include ../partials/header.ejs %>
-    <h2>Log In</h2>
-    <!-- Bad Login Message -->
-    <% if (message) { %>
-      <%= message %>
-    <% } %>
+    <div id="form-box">
+      <div id="login-form ">
+        <h2>Log In</h2>
+        <!-- Bad Login Message -->
+        <% if (message) { %>
+          <br />
+          <%= message %>
+          <br />
+        <% } %>
+        <!-- Login Form -->
+        <form action="/login" method="post">
+          Username: <input type="text" name="username" /><br />
+          Password: <input type="password" name="password" /><br />
+          <button type="submit" name="button">Submit</button>
+        </form>
+      </div>
 
-    <!-- Login Form -->
-    <form action="/login" method="post">
-      Username: <input type="text" name="username" /><br />
-      Password: <input type="password" name="password" /><br />
-      <button type="submit" name="button">Submit</button>
-    </form>
-    <br/>
-
-
-    <!-- Register Form -->
-    <h2>Register</h2>
-    <form action="/register" method="post">
-      Username: <input type="text" name="username" /><br />
-      Password: <input type="password" name="password" /><br />
-      <button type="submit" name="button">Register</button>
-    </form>
+      <div id="register-form">
+        <!-- Register Form -->
+        <h2>Register</h2>
+        <form action="/register" method="post">
+          Username: <input type="text" name="username" /><br />
+          Password: <input type="password" name="password" /><br />
+          <button type="submit" name="button">Register</button>
+        </form>
+      </div>
+    </div>
 
     <% include ../partials/footer.ejs %>
   </body>

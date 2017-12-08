@@ -1,0 +1,7 @@
+#form-box {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  max-width: 100%;
+  margin: 0 auto;
+}

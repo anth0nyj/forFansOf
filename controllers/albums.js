@@ -62,8 +62,15 @@ router.post('/', async (req, res) => {
 router.get('/:album/edit', async (req, res) => {
   try {
     const albumToEdit = await Album.findOne({albumURL: req.params.album});
+    let user = {};
+    if (req.session.logged) {
+      user = req.session.username;
+    } else {
+      user.logged = false;
+    }
     res.render('albums/edit.ejs', {
-      album: albumToEdit
+      album: albumToEdit,
+      user
     });
   } catch (err) {
     res.send(err.message);
