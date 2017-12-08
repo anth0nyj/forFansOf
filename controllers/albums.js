@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
 // Update Page
 router.get('/:album/edit', async (req, res) => {
   try {
-    const albumToEdit = await Album.find({name: req.params.album});
+    const albumToEdit = await Album.findOne({albumURL: req.params.album});
     res.render('albums/edit.ejs', {
       album: albumToEdit
     });
@@ -66,8 +66,11 @@ router.get('/:album/edit', async (req, res) => {
 
 // Update Route
 router.put('/:album', async (req, res) => {
-  const albumToUpdate = await Album.update(
-    {title: req.params.album},
+  req.body.forFansOf = req.body.forFansOf.split(', ');
+  req.body.genres = req.body.genres.split(', ');
+  req.body.tracks = req.body.tracks.split(', ');
+  await Album.update(
+    {albumURL: req.params.album},
     {
       $set: {
         title: req.body.title,
