@@ -11,7 +11,7 @@ This web app is intended to serve as a catalog of musicians and their work, as w
 
 ### Software
 - [Atom](https://atom.io/)
-- [iTerm2 ]https://www.iterm2.com/
+- [iTerm2](https://www.iterm2.com/)
 
 ### Deployment
 This web app is hosted on Heroku [here](https://forfansof.herokuapp.com).
